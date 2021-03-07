@@ -1,6 +1,6 @@
-#Download the code for excercises. 
+**#Download the code for excercises. **
 
-##Each project consists of: 
+**##Each project consists of:  **
 
 1) an .R file,
 2) one or more .stan files and, 
