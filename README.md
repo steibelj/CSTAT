@@ -1,4 +1,4 @@
-# Download the code for excercises
+# Bayesian Inference using Stan: CSTAT workshop
 
 ## Each project consists of:
 
