@@ -1,14 +1,6 @@
 # Bayesian Inference using Stan: CSTAT workshop
 
-## Each project consists of:
-
-### 1) an .R file,
-### 2) one or more .stan files and, 
-### 3) optionally, .RData files with the outputs
-
-When following each project, make sure to go back to the learning objectives and review the code related to each point
-
-## how to install stan
+## How to install stan
 
 ### Install rstudio, R and Rtools (if working in windows)
 https://rstudio.com/products/rstudio/download/
