@@ -14,7 +14,7 @@ rm(list=ls())
 
 
 
-setwd("C:/Users/marti/OneDrive/Documents/job/bayesian inference/CSTAT")
+setwd("C:/Users/marti/OneDrive/Documents/job/bayesian inference/CSTAT/example 1/")
 
 #Data
 N <- 27  
@@ -38,7 +38,7 @@ smf
 (smf$sigma)^2
 
 prc<-predict(lmf, interval="confidence" )
-
+prc
 
 plot(Y~x,ylim=c(1.5,3),xlab="age",ylab="length",pch=19)
 points(prc[,1]~x,type="l",lwd=2)
@@ -53,6 +53,7 @@ stdug<-stan(file = "dugongs_linear.stan",
             warmup = 100,
             iter=1000,
             chains = 4)
+
 class(stdug)
 str(stdug)
 save(stdug,file="first_fit.RData" )
@@ -83,7 +84,7 @@ dim(mcmc_sample)
 colMeans(mcmc_sample)
 apply(mcmc_sample,2,sd)
 smf
-
+#Question to class: what is a BIG assumtion of this posterior analysis?
 
 #the code is contained in the stanfit object
 get_stancode(stdug)
@@ -119,6 +120,10 @@ monitor(stdug)
 sum_met<-summary(stdug)
 str(sum_met)
 sum_met$summary
+#Question for the class: what is the difference between se_mean (MCMC SE)
+#                         and sd (posterior sd)?
+
+
 #per chanin
 sum_met$c_summary
 
@@ -126,9 +131,22 @@ sum_met$c_summary
 #diagnostics
 mcmc_trace(stdug)
 mcmc_scatter(stdug,pars=c("alpha","beta"))
+#disgtression to reflect on the posterior correlation between intercept and slope
+#plot(data_reg$Y~data_reg$x)
+#for (i in 1:nrow(mcmc_sample)){
+#  abline(mcmc_sample[i,1],mcmc_sample[i,2],col="lightgray")
+#  }
 mcmc_pairs(stdug)
 mcmc_acf(stdug)
 mcmc_acf_bar(stdug)
+
+rhat(stdug)
+mcmc_rhat(rhat(stdug))
+mcmc_rhat_data(rhat(stdug))
+
+neff_ratio(stdug)
+mcmc_neff(neff_ratio(stdug))
+mcmc_neff_data(neff_ratio(stdug))
 
 #graphical summaries
 mcmc_intervals(stdug)
