@@ -4,7 +4,9 @@
 
 ### Install rstudio, R and Rtools (if working in windows)
 https://rstudio.com/products/rstudio/download/
+
 https://cran.r-project.org/
+
 https://cran.r-project.org/bin/windows/Rtools/
 
 ### Install rstan
