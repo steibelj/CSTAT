@@ -1,7 +1,7 @@
 #prediction
 
 #Learning objective 1: Identify in a stanmodel how parameter transformations are generated
-#Learning objective 2: Use generated quantities to perform ingerences
+#Learning objective 2: Use generated quantities to perform inferences
 #learning objective 3: Use R coding to generate parameter transformations
 
 
@@ -103,9 +103,9 @@ plu<-apply(y_rep,2,quantile,probs=0.975)
 points(x,pll,col="blue")
 points(x,plu,col="blue")
 
-#Ideas to implement parameter transformations/predictions in stan
-#program in stan those transformations that you know for sure you will be using
-#perform two model fits:
-  #1) to assess convergence and obtain model paramenters
-  #2) to obtain predictions/model transformations
-  #HINT: use "pars to sample ONLY what you want to sample in each run.
+#now let's use quantities extracted from stanfit object
+expected_value<-as.data.frame(extract(stdug,pars="y0"))
+hist(expected_value$y0)
+abline(v=Y[x==10],lwd=5)
+
+       
