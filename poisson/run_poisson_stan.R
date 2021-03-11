@@ -1,4 +1,10 @@
+#learning Objective 1: understand how to code a  poisson GLM in stan
+#learning Objective 2: understand how overdispersion is modeled in GLM
+#learning Objective 3: Perform model checking using ppd
+
 library(rstan)
+
+
 library(bayesplot)
 library(shinystan)
 options(mc.cores = parallel::detectCores())
@@ -48,16 +54,15 @@ print(pois_mod, pars = c("alpha","beta"))
 traceplot(pois_mod,pars=c('alpha',"beta"))
 
 
-
-
 #is there a difference in hare numbers between arable and grasasland?
+#class proposed some bayesplot graphics
+
 #is beta significant?
 #tail area probability?
 beta<-extract(pois_mod,pars="beta")
 ind_var<-beta$beta<0
 tail_area<-2*mean(ind_var)
 tail_area
-mcmc_areas(pois_mod,pars = c("alpha","beta"))
 
 
 #overdispersion
@@ -69,5 +74,19 @@ yrep<-extract(pois_mod,"yrep")$yrep
 yrep2<-extract(pois_op_mod,"yrep")$yrep
 
 dim(yrep)
-pp_check(C,yrep,fun="stat",stat="var")
+pp_check(C,yrep,fun="stat",stat="sd")
 pp_check(C,yrep2,fun="stat",stat="sd",binwidth=0.5)
+
+ppc_dens_overlay(y = C,yrep = yrep[sample(nrow(yrep), 100),])
+ppc_dens_overlay(y = C,yrep = yrep2[sample(nrow(yrep2), 100),])
+
+ppc_ecdf_overlay(y = C,yrep = yrep)
+ppc_ecdf_overlay(y = C,yrep = yrep2)
+
+vmr<-function(x){
+  vnr<-100*var(x)/mean(x)
+}
+pp_check(C,yrep,fun="stat",stat="vmr")
+pp_check(C,yrep2,fun="stat",stat="vmr",binwidth=0.5)
+
+
