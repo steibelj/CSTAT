@@ -27,11 +27,9 @@ model {
     e[i]~normal(0,1);
   // Likelihood
   C ~ poisson_log(log_lambda);
-  
-  
 }
 
-generated quantities{s
+generated quantities{
  int<lower=0> yrep[n];
  vector[n] erep;
  for (i in 1:n)
