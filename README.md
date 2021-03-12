@@ -30,7 +30,7 @@ https://mc-stan.org/rstanarm/
 https://mc-stan.org/shinystan/
 
 ### Installing compile tools in MacOS
-Connie Rojas, a workshop participant sent the following instructions for installing the compile tools (and stan) in macOS. Thanks for your contribution!!!
+Connie Rojas, a workshop participant, sent the following instructions for installing the compile tools (and stan) in macOS. Thanks for your contribution!!!
 
 1) Download Xcode from Mac App store
 Xcode (Developer Tools)
