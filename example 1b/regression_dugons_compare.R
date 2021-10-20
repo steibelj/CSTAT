@@ -14,7 +14,7 @@ rm(list=ls())
 
 
 
-setwd("C:/Users/marti/OneDrive/Documents/job/bayesian inference/CSTAT/")
+setwd("C:/Users/marti/OneDrive/Documents/job/bayesian inference/CSTAT/example 1b/")
 
 #Data
 N <- 27  
@@ -39,12 +39,12 @@ stdug2<-stan(file = "dugongs_linear_2.stan",
             chains = 4)
 
 save(stdug2,file="second_fit.RData" )
-load("first_fit.RData")
+load("../example 1/first_fit.RData")
 #load("second_fit.RData")
 
 #look into the stanfit object in more detail
 pairs(stdug2)
-
+pairs(stdug)
 
 #time elapsed in the MC runs (it does not include compilation time)
 get_elapsed_time(stdug2)
@@ -82,3 +82,4 @@ sum_met$summary
 get_elapsed_time(stdug_flat)
 
 mcmc_acf(stdug_flat)
+
