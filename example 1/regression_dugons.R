@@ -11,7 +11,7 @@ library(shinystan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 rm(list=ls())
-
+ls()
 
 
 setwd("C:/Users/marti/OneDrive/Documents/job/bayesian inference/CSTAT/example 1/")
@@ -57,7 +57,7 @@ stdug<-stan(file = "dugongs_linear.stan",
 class(stdug)
 str(stdug)
 save(stdug,file="first_fit.RData" )
-#load("first_fit.RData")
+load("first_fit.RData")
 #look into the stanfit object in more detail
 
 #sampler parameters
@@ -106,7 +106,7 @@ get_elapsed_time(stdug)
 #methods for stanfit objects
 #graphics
 plot(stdug)
-plot(stdug,pars=c("beta","sigma"))
+plot(stdug,pars=c("beta","sigma"),prob=0.95)
 traceplot(stdug)
 
 #summaries
@@ -120,6 +120,7 @@ monitor(stdug)
 sum_met<-summary(stdug)
 str(sum_met)
 sum_met$summary
+sum_met$c_summary
 #Question for the class: what is the difference between se_mean (MCMC SE)
 #                         and sd (posterior sd)?
 
@@ -140,6 +141,7 @@ mcmc_pairs(stdug)
 mcmc_acf(stdug)
 mcmc_acf_bar(stdug)
 
+rhat
 rhat(stdug)
 mcmc_rhat(rhat(stdug))
 mcmc_rhat_data(rhat(stdug))
@@ -154,11 +156,15 @@ mcmc_intervals(stdug,pars=c("beta","sigma"),prob = 0.9,prob_outer = 0.99)
 
 mcmc_areas(mcmc_sample,pars = c("alpha","beta","sigma"))
 
-plot_title<-ggtitle("Posterior distributions","median and 80% posterior prob. interval")
+plot_title<-ggtitle("Posterior distributions","median and 90% posterior prob. interval")
 mcmc_areas(mcmc_sample,pars = c("beta","sigma"),prob=0.9,prob_outer = 0.99)+plot_title
 
 mcmc_hist(mcmc_sample)
 
 
 #shinystan
+library(shinystan)
 launch_shinystan(stdug)
+
+
+
